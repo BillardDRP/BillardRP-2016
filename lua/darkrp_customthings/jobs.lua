@@ -1,3 +1,9 @@
+local function RegisterJobCategory(id, name, color)
+	g_RegisterJobWithColor = color or Color(255, 0, 0)
+	g_RegisterJobWithCategory = name or "Other"
+	include("jobs/" .. id .. ".lua")
+end
+
 --[[---------------------------------------------------------------------------
 DarkRP custom jobs
 ---------------------------------------------------------------------------
@@ -18,18 +24,16 @@ http://wiki.darkrp.com/index.php/DarkRP:CustomJobFields
 Add jobs under the following line:
 ---------------------------------------------------------------------------]]
 
-
-
-
-
-
-
+RegisterJobCategory("citizens", "Citizens", Color(0, 255, 0))
+RegisterJobCategory("crime", "Criminals", Color(255, 0, 0))
+RegisterJobCategory("dealers", "Salesmen", Color(0, 255, 255))
+RegisterJobCategory("police", "Civil Protection", Color(0, 0, 255))
+RegisterJobCategory("hobos", "Unemployed", Color(255, 255, 0))
 
 --[[---------------------------------------------------------------------------
 Define which team joining players spawn into and what team you change to if demoted
 ---------------------------------------------------------------------------]]
 GAMEMODE.DefaultTeam = TEAM_CITIZEN
-
 
 --[[---------------------------------------------------------------------------
 Define which teams belong to civil protection
@@ -44,4 +48,5 @@ GAMEMODE.CivilProtection = {
 --[[---------------------------------------------------------------------------
 Jobs that are hitmen (enables the hitman menu)
 ---------------------------------------------------------------------------]]
-DarkRP.addHitmanTeam(TEAM_MOB)
+DarkRP.addHitmanTeam(TEAM_GODFATHER)
+DarkRP.addHitmanTeam(TEAM_HITMAN)
