@@ -61,7 +61,7 @@ function ENT:PrinterError()
 	if (self:GetBatteries() < 1) then
 		return "No battery"
 	end
-	return ""
+	return false
 end
 
 if SERVER then
@@ -70,7 +70,7 @@ if SERVER then
 			if (ent:GetClass() == "zig_ink") and (self:GetInk() < self.Print.Max.Ink) then
 				SafeRemoveEntity(ent)
 				self:SetInk(math.Clamp(self:GetInk() + 1, 0, self.Print.Max.Ink))
-				self:EmitSound("ambient/water/drip"..math.random(1, 4)..".wav")
+				self:EmitSound("ambient/water/drip" .. math.random(1, 4) .. ".wav")
 			end
 			if (ent:GetClass() == "zig_battery") and (self:GetBatteries() < self.Print.Max.Batteries) then
 				SafeRemoveEntity(ent)
@@ -99,11 +99,9 @@ if SERVER then
 		return true
 	end
 	function ENT:Use(activator, caller)
-		if IsValid(caller) and caller:IsPlayer() then
-			if (self:GetStoredMoney() > 0) then
-				caller:addMoney(self:GetStoredMoney())
-				self:SetStoredMoney(0)
-			end
+		if IsValid(caller) and caller:IsPlayer() and self:GetStoredMoney() > 0 then
+			caller:addMoney(self:GetStoredMoney())
+			self:SetStoredMoney(0)
 		end
 	end
 end
@@ -128,22 +126,21 @@ if CLIENT then
 		local BackgroundColor = self.Display.Background or Color(255, 100, 100)
 		local TextColor = self.Display.Text or Color(255, 255, 255)
 
-		local SingleSingle = -PrinterWidth + BorderWidth
 		local SingleDouble = -PrinterWidth + (BorderWidth * 2)
-		local DoubleSingle = (-PrinterWidth * 2) + BorderWidth
-		local DoubleDouble = (-PrinterWidth * 2) + (BorderWidth * 2)
 
-		local prog = math.ceil(Lerp(self:GetPrintingProgress() / (math.max(self.Print.Time - (5 * self:GetBatteries()), 1)), 0, 100))
+		local prog = math.ceil(Lerp(self:GetPrintingProgress() / math.max(self.Print.Time - (5 * self:GetBatteries()), 1, 0, 100)))
 		local err = self:PrinterError()
 
 		cam.Start3D2D(Pos + Ang:Up() * 11.5, Ang, 0.11)
 			draw.RoundedBox(2, -PrinterWidth, -PrinterWidth, PrinterWidth * 2, PrinterWidth * 2, BorderColor)
 			draw.RoundedBox(2, -PrinterWidth + BorderWidth, -PrinterWidth + BorderWidth, (PrinterWidth * 2) - (BorderWidth * 2), (PrinterWidth * 2) - (BorderWidth * 2), BackgroundColor)
-			draw.WordBox(2, SingleDouble, SingleDouble + (40 * 0), "Money: $"..string.Comma(self:GetStoredMoney()), "Trebuchet24", BorderColor, TextColor)
-			draw.WordBox(2, SingleDouble, SingleDouble + (40 * 1), "Progress: "..prog.."%", "Trebuchet24", BorderColor, TextColor)
-			draw.WordBox(2, SingleDouble, SingleDouble + (40 * 2), "Ink: "..self:GetInk(), "Trebuchet24", BorderColor, TextColor)
-			draw.WordBox(2, SingleDouble, SingleDouble + (40 * 3), "Batteries: "..self:GetBatteries(), "Trebuchet24", BorderColor, TextColor)
-			draw.WordBox(2, SingleDouble, SingleDouble + (40 * 4), err, "Trebuchet24", BorderColor, TextColor)
+			draw.WordBox(2, SingleDouble, SingleDouble + (40 * 0), "Money: $" .. string.Comma(self:GetStoredMoney()), "Trebuchet24", BorderColor, TextColor)
+			draw.WordBox(2, SingleDouble, SingleDouble + (40 * 1), "Progress: " .. prog .. "%", "Trebuchet24", BorderColor, TextColor)
+			draw.WordBox(2, SingleDouble, SingleDouble + (40 * 2), "Ink: " .. self:GetInk(), "Trebuchet24", BorderColor, TextColor)
+			draw.WordBox(2, SingleDouble, SingleDouble + (40 * 3), "Batteries: " .. self:GetBatteries(), "Trebuchet24", BorderColor, TextColor)
+			if err then
+				draw.WordBox(2, SingleDouble, SingleDouble + (40 * 4), err, "Trebuchet24", BorderColor, TextColor)
+			end
 		cam.End3D2D()
 		cam.Start3D2D(Pos + (Ang2:Up() * 17) + (Ang2:Right() * 4), Ang2, 0.11)
 			draw.RoundedBox(2, -PrinterWidth, -PrinterWidth, PrinterWidth * 2, FrontHeight * 2, BorderColor)

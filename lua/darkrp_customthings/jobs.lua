@@ -101,7 +101,7 @@ TEAM_LAWYER = DarkRP.createJob("Lawyer", {
 	model = "models/player/gman_high.mdl",
 	description = [[Lawyers use their knowledge of the law to release people from jail.
 		Releasing people from jail is perfectly legal.]],
-	weapons = {},
+	weapons = {"unarrest_stick"},
 	command = "lawyer",
 	max = 4,
 	salary = GAMEMODE.Config.normalsalary * 1.5,
@@ -290,6 +290,20 @@ TEAM_DRUG = DarkRP.createJob("Drug Dealer", {
 	model = "models/player/soldier_stripped.mdl",
 	description = [[Drug dealers sell drugs to other people.
 		Make sure you aren't caught selling illegal drugs to the public! You might get arrested!]],
+	weapons = {},
+	command = "drugdealer",
+	max = 4,
+	salary = GAMEMODE.Config.normalsalary,
+	admin = 0,
+	vote = false,
+	hasLicense = false,
+	category = g_RegisterJobWithCategory,
+})
+
+TEAM_VAPE = DarkRP.createJob("Vape Dealer", {
+	color = g_RegisterJobWithColor,
+	model = "models/player/soldier_stripped.mdl",
+	description = [[Vape dealers ]],
 	weapons = {},
 	command = "drugdealer",
 	max = 4,
