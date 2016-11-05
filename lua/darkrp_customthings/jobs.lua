@@ -72,7 +72,7 @@ TEAM_DOCTOR = DarkRP.createJob("Doctor", {
 		Right click with the Medical Kit to heal yourself.]],
 	weapons = {"med_kit"},
 	command = "doctor",
-	max = 3,
+	max = 4,
 	salary = GAMEMODE.Config.normalsalary,
 	admin = 0,
 	vote = false,
@@ -302,7 +302,7 @@ TEAM_DRUG = DarkRP.createJob("Drug Dealer", {
 
 TEAM_BLACKMARKET = DarkRP.createJob("Black Market Dealer", {
 	color = g_RegisterJobWithColor,
-	model = "models/player/monk.mdl",
+	model = "models/player/eli.mdl",
 	description = [[Black market dealers sell highly illegal items to other people.
 		Make sure you aren't caught selling illegal items to the public! You might get arrested!]],
 	weapons = {},
