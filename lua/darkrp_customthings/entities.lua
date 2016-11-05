@@ -71,7 +71,7 @@ EasyEntity("cityrp_bleach", 600, "bleach", "Other")
 EasyEntity("cityrp_kevlar", 12000, "kevlar", "Black Market", TEAM_BLACKMARKET)
 EasyEntity("cityrp_breach", 60000, "breach", "Black Market", TEAM_BLACKMARKET)
 
-EasyEntity("cityrp_defuser", 60000, "defuser", "Government Issue Supplies", {TEAM_MAYOR, TEAM_CHIEF, TEAM_POLICE})
+EasyEntity("cityrp_defuser", 6000, "defuser", "Government Issue Supplies", {TEAM_MAYOR, TEAM_CHIEF, TEAM_POLICE})
 
 end
 

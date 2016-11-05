@@ -53,6 +53,7 @@ EasyCategory("shipments", "Drugs", Color(0, 107, 0))
 EasyCategory("shipments", "Medical", Color(0, 107, 0))
 EasyCategory("shipments", "Beverages", Color(0, 107, 0))
 EasyCategory("shipments", "Black Market", Color(0, 107, 0))
+EasyCategory("shipments", "Vapes", Color(0, 107, 0))
 
 EasyCategory("shipments", "Pistols", Color(0, 107, 0))
 EasyCategory("shipments", "Submachine Guns", Color(0, 107, 0))
