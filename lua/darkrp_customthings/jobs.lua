@@ -29,6 +29,7 @@ RegisterJobCategory("crime", "Criminals", Color(255, 0, 0))
 RegisterJobCategory("dealers", "Salesmen", Color(0, 255, 255))
 RegisterJobCategory("police", "Civil Protection", Color(0, 0, 255))
 RegisterJobCategory("hobos", "Unemployed", Color(255, 255, 0))
+RegisterJobCategory("special", "Special", Color(255, 0, 255))
 
 --[[---------------------------------------------------------------------------
 Define which team joining players spawn into and what team you change to if demoted
