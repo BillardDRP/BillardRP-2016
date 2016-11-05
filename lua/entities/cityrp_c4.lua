@@ -28,7 +28,7 @@ if SERVER then
 			if self:GetPlanted() then
 				if caller.CarryingC4Defuser then
 					caller:ChatPrint("You have successfully defused the bomb.")
-					self:EmitSound(Defuse = Sound("weapons/c4/c4_disarm.wav"))
+					self:EmitSound(Sound("weapons/c4/c4_disarm.wav"))
 					if math.random(1, 100) <= 40 then
 						caller:ChatPrint("Unfortunately, your defuser broke in the process.")
 						caller.CarryingC4Defuser = false
@@ -45,7 +45,7 @@ if SERVER then
 					timer.Simple(i, function()
 						if not IsValid(self) then return end
 						self:SetCountdown(Timer - i)
-						self:EmitSound(Beep = Sound("weapons/c4/c4_beep1.wav"))
+						self:EmitSound(Sound("weapons/c4/c4_beep1.wav"))
 					end)
 				end
 				timer.Simple(Timer + 1, function()

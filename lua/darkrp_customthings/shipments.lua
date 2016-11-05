@@ -35,6 +35,15 @@ local function EntityShipment(who, cat, what, cost, mdl)
 		allowed = who,
 		category = cat,
 	})
+	DarkRP.createEntity(scripted_ents.Get(what).PrintName or "ERROR NAME", {
+		ent = what,
+		model = mdl,
+		price = cost,
+		max = 4,
+		cmd = "buy" .. com,
+		allowed = who,
+		category = cat,
+	})
 end
 
 --[[---------------------------------------------------------------------------
@@ -86,7 +95,13 @@ WeaponShipment(TEAM_GUN, "Snipers", "tfcss_g3sg1_alt", 6400)
 WeaponShipment(TEAM_GUN, "Snipers", "tfcss_sg550_alt", 6800)
 WeaponShipment(TEAM_GUN, "Snipers", "tfcss_awp_alt", 7200)
 
+WeaponShipment(TEAM_BLACKMARKET, "Black Market", "lockpick", 4200)
+WeaponShipment(TEAM_BLACKMARKET, "Black Market", "keypad_cracker", 2400)
+WeaponShipment(TEAM_BLACKMARKET, "Black Market", "med_kit", 3600)
+WeaponShipment(TEAM_BLACKMARKET, "Black Market", "unarrest_stick", 9800)
+
 EntityShipment(TEAM_DOCTOR, "Medical", "durgz_aspirin", 1200, "models/jaanus/aspbtl.mdl")
+EntityShipment(TEAM_DOCTOR, "Medical", "cityrp_medkit", 1000, "models/Items/HealthKit.mdl")
 
 EntityShipment(TEAM_BAR, "Beverages", "durgz_alcohol", 400, "models/drug_mod/alcohol_can.mdl")
 EntityShipment(TEAM_BAR, "Beverages", "durgz_water", 200, "models/drug_mod/the_bottle_of_water.mdl")

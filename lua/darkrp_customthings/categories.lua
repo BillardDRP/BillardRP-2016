@@ -45,9 +45,14 @@ EasyCategory("entities", "Printer Accessories", Color(0, 107, 0))
 EasyCategory("entities", "Black Market", Color(0, 107, 0))
 EasyCategory("entities", "Government Issue Supplies", Color(0, 107, 0))
 
+EasyCategory("entities", "Drugs", Color(0, 107, 0))
+EasyCategory("entities", "Medical", Color(0, 107, 0))
+EasyCategory("entities", "Beverages", Color(0, 107, 0))
+
 EasyCategory("shipments", "Drugs", Color(0, 107, 0))
 EasyCategory("shipments", "Medical", Color(0, 107, 0))
 EasyCategory("shipments", "Beverages", Color(0, 107, 0))
+EasyCategory("shipments", "Black Market", Color(0, 107, 0))
 
 EasyCategory("shipments", "Pistols", Color(0, 107, 0))
 EasyCategory("shipments", "Submachine Guns", Color(0, 107, 0))
