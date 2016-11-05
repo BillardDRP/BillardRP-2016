@@ -1,16 +1,27 @@
 
-local function EasyEntity(cls, cost, com, cat, m)
-	local ma = 4
-	if m ~= nil then
-		ma = m
+local m_Max = 4
+
+local function EasyEntity(cls, cost, com, cat, who)
+	if who == nil then
+		DarkRP.createEntity(scripted_ents.Get(cls).PrintName, {
+			ent = cls,
+			model = scripted_ents.Get(cls).Model,
+			price = cost,
+			max = m_Max,
+			cmd = "buy" .. com,
+			category = cat,
+		})
+	else
+		DarkRP.createEntity(scripted_ents.Get(cls).PrintName, {
+			ent = cls,
+			model = scripted_ents.Get(cls).Model,
+			price = cost,
+			max = m_Max,
+			cmd = "buy" .. com,
+			allowed = who,
+			category = cat,
+		})
 	end
-	DarkRP.createEntity(scripted_ents.Get(cls).PrintName, {
-		ent = cls,
-		model = scripted_ents.Get(cls).Model,
-		price = cost,
-		max = ma,
-		cmd = "buy" .. com,
-	})
 end
 
 --[[---------------------------------------------------------------------------
@@ -41,3 +52,17 @@ EasyEntity("zig_printer_diamond", 60000, "diamondprinter", "Printers")
 
 EasyEntity("zig_battery", 2000, "battery", "Printer Accessories")
 EasyEntity("zig_ink", 1000, "ink", "Printer Accessories")
+
+m_Max = 1
+
+EasyEntity("cityrp_spraycan", 12, "spraycan", "Other")
+EasyEntity("cityrp_battery", 24, "flashlightbattery", "Other")
+
+m_Max = 4
+
+EasyEntity("cityrp_bleach", 600, "bleach", "Other")
+
+EasyEntity("cityrp_kevlar", 12000, "kevlar", "Black Market", TEAM_BLACKMARKET)
+EasyEntity("cityrp_c4", 60000, "c4", "Black Market", TEAM_BLACKMARKET)
+
+EasyEntity("cityrp_defuser", 60000, "defuser", "Government Issue Supplies", {TEAM_MAYOR, TEAM_CHIEF, TEAM_POLICE})
