@@ -2,6 +2,9 @@
 local m_Max = 4
 
 local function EasyEntity(cls, cost, com, cat, who)
+	if not scripted_ents.Get(cls) then
+		ErrorNoHalt("[DarkRP] Entity class " .. cls .. " is invalid!")
+	end
 	if who == nil then
 		DarkRP.createEntity(scripted_ents.Get(cls).PrintName or "ERROR NAME", {
 			ent = cls,

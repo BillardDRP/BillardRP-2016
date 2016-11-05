@@ -1,5 +1,8 @@
 
 local function WeaponShipment(who, cat, wep, cost)
+	if not weapons.Get(wep) then
+		ErrorNoHalt("[DarkRP] Shipment class " .. wep .. " is invalid!")
+	end
 	local name = weapons.Get(wep).PrintName or "ERROR NAME"
 	if string.lower(string.Left(name, 4)) == "alt " then
 		name = string.sub(name, 5)
@@ -17,6 +20,9 @@ local function WeaponShipment(who, cat, wep, cost)
 end
 
 local function EntityShipment(who, cat, what, cost, mdl)
+	if not scripted_ents.Get(what) then
+		ErrorNoHalt("[DarkRP] Shipment class " .. what .. " is invalid!")
+	end
 	DarkRP.createShipment(scripted_ents.Get(what).PrintName or "ERROR NAME", {
 		model = mdl,
 		entity = what,
@@ -64,17 +70,17 @@ WeaponShipment(TEAM_GUN, "Submachine Guns", "tfcss_tmp_alt", 2800)
 WeaponShipment(TEAM_GUN, "Shotguns", "tfcss_m3_alt", 3000)
 WeaponShipment(TEAM_GUN, "Shotguns", "tfcss_xm1014_alt", 4600)
 
-WeaponShipment(TEAM_GUN, "Assault Rifles", "tfcss_famas_alt", 3600)
-WeaponShipment(TEAM_GUN, "Assault Rifles", "tfcss_galil_alt", 3800)
-WeaponShipment(TEAM_GUN, "Assault Rifles", "tfcss_m4a1_alt", 4000)
-WeaponShipment(TEAM_GUN, "Assault Rifles", "tfcss_ak47_alt", 4200)
-WeaponShipment(TEAM_GUN, "Assault Rifles", "tfcss_sg552_alt", 4400)
-WeaponShipment(TEAM_GUN, "Assault Rifles", "tfcss_aug_alt", 4600)
+WeaponShipment(TEAM_GUN, "Rifles", "tfcss_famas_alt", 3600)
+WeaponShipment(TEAM_GUN, "Rifles", "tfcss_galil_alt", 3800)
+WeaponShipment(TEAM_GUN, "Rifles", "tfcss_m4a1_alt", 4000)
+WeaponShipment(TEAM_GUN, "Rifles", "tfcss_ak47_alt", 4200)
+WeaponShipment(TEAM_GUN, "Rifles", "tfcss_sg552_alt", 4400)
+WeaponShipment(TEAM_GUN, "Rifles", "tfcss_aug_alt", 4600)
 
-WeaponShipment(TEAM_GUN, "Sniper Rifles", "tfcss_scout_alt", 6000)
-WeaponShipment(TEAM_GUN, "Sniper Rifles", "tfcss_g3sg1_alt", 6400)
-WeaponShipment(TEAM_GUN, "Sniper Rifles", "tfcss_sg550_alt", 6800)
-WeaponShipment(TEAM_GUN, "Sniper Rifles", "tfcss_awp_alt", 7200)
+WeaponShipment(TEAM_GUN, "Snipers", "tfcss_scout_alt", 6000)
+WeaponShipment(TEAM_GUN, "Snipers", "tfcss_g3sg1_alt", 6400)
+WeaponShipment(TEAM_GUN, "Snipers", "tfcss_sg550_alt", 6800)
+WeaponShipment(TEAM_GUN, "Snipers", "tfcss_awp_alt", 7200)
 
 EntityShipment(TEAM_DOCTOR, "Medical", "durgz_aspirin", 1200, "models/jaanus/aspbtl.mdl")
 
