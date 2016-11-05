@@ -1,13 +1,32 @@
 
-local function EasyCategory(kind, nm, clr)
-	DarkRP.createCategory{
-		name = nm,
-		categorises = kind,
-		startExpanded = true,
-		color = clr,
-		canSee = function(ply) return true end,
-		sortOrder = 100,
-	}
+local function EasyCategory(kind, nm, clr, ship_and_wep)
+	if ship_and_wep == nil then
+		DarkRP.createCategory{
+			name = nm,
+			categorises = kind,
+			startExpanded = true,
+			color = clr,
+			canSee = function(ply) return true end,
+			sortOrder = 100,
+		}
+	elseif kind == "weapons" or kind == "shipments" then
+		DarkRP.createCategory{
+			name = nm,
+			categorises = "shipments",
+			startExpanded = true,
+			color = clr,
+			canSee = function(ply) return true end,
+			sortOrder = 100,
+		}
+		DarkRP.createCategory{
+			name = nm,
+			categorises = "weapons",
+			startExpanded = true,
+			color = clr,
+			canSee = function(ply) return true end,
+			sortOrder = 100,
+		}
+	end
 end
 
 --[[-----------------------------------------------------------------------
@@ -39,3 +58,12 @@ EasyCategory("jobs", "Dealers", Color(0, 255, 255))
 EasyCategory("jobs", "Police", Color(0, 0, 255))
 EasyCategory("jobs", "Hobos", Color(255, 255, 0))
 EasyCategory("jobs", "Special", Color(255, 0, 255))
+
+EasyCategory("entities", "Contraband", Color(0, 107, 0))
+EasyCategory("entities", "Drugs", Color(0, 107, 0))
+EasyCategory("entities", "Medical", Color(0, 107, 0))
+
+EasyCategory("shipments", "Submachine Guns", Color(0, 107, 0), true)
+EasyCategory("shipments", "Sniper Rifles", Color(0, 107, 0), true)
+EasyCategory("shipments", "Assault Rifles", Color(0, 107, 0), true)
+EasyCategory("shipments", "Shotguns", Color(0, 107, 0), true)
