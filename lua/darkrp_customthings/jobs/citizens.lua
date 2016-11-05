@@ -1,5 +1,5 @@
 TEAM_CITIZEN = DarkRP.createJob("Citizen", {
-    color = Color(20, 150, 20, 255),
+    color = g_RegisterJobWithColor,
     model = {
         "models/player/Group01/Female_01.mdl",
         "models/player/Group01/Female_02.mdl",
@@ -25,11 +25,11 @@ TEAM_CITIZEN = DarkRP.createJob("Citizen", {
     vote = false,
     hasLicense = false,
     candemote = false,
-    category = "Citizens",
+    category = g_RegisterJobWithCategory,
 })
 
-TEAM_MEDIC = DarkRP.createJob("Medic", {
-    color = Color(47, 79, 79, 255),
+TEAM_DOCTOR = DarkRP.createJob("Doctor", {
+    color = g_RegisterJobWithColor,
     model = "models/player/kleiner.mdl",
     description = [[With your medical knowledge you work to restore players to full health.
         Without a medic, people cannot be healed.
@@ -43,25 +43,20 @@ TEAM_MEDIC = DarkRP.createJob("Medic", {
     vote = false,
     hasLicense = false,
     medic = true,
-    category = "Citizens",
+    category = g_RegisterJobWithCategory,
 })
 
-TEAM_HOBO = DarkRP.createJob("Hobo", {
-    color = Color(80, 45, 0, 255),
-    model = "models/player/corpse1.mdl",
-    description = [[The lowest member of society. Everybody laughs at you.
-        You have no home.
-        Beg for your food and money
-        Sing for everyone who passes to get money
-        Make your own wooden home somewhere in a corner or outside someone else's door]],
-    weapons = {"weapon_bugbait"},
-    command = "hobo",
-    max = 5,
-    salary = 0,
+TEAM_GUARD = DarkRP.createJob("Guard", {
+    color = g_RegisterJobWithColor,
+    model = {"models/player/barney.mdl"},
+    description = [[Guards can be paid to protect certain areas or people.]],
+    weapons = {"tfa_sig_p229r", "stunstick"},
+    command = "guard",
+    max = 0,
+    salary = GAMEMODE.Config.normalsalary,
     admin = 0,
     vote = false,
-    hasLicense = false,
+    hasLicense = true,
     candemote = false,
-    hobo = true,
-    category = "Citizens",
+    category = g_RegisterJobWithCategory,
 })
