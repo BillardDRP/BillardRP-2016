@@ -61,6 +61,8 @@ EasyCategory("jobs", "Special", Color(255, 0, 255))
 
 EasyCategory("entities", "Printers", Color(0, 107, 0))
 EasyCategory("entities", "Printer Accessories", Color(0, 107, 0))
+EasyCategory("entities", "Black Market", Color(0, 107, 0))
+EasyCategory("entities", "Government Issue Supplies", Color(0, 107, 0))
 
 EasyCategory("shipments", "Drugs", Color(0, 107, 0))
 EasyCategory("shipments", "Medical", Color(0, 107, 0))
