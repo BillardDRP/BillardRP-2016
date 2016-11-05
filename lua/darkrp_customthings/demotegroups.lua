@@ -11,6 +11,7 @@ HOW TO CREATE A DEMOTE GROUP:
 DarkRP.createDemoteGroup("Name of the group", {TEAM1, TEAM2})
 ---------------------------------------------------------------------------]]
 
-
--- Example: DarkRP.createDemoteGroup("Cops", {TEAM_POLICE, TEAM_CHIEF})
--- Example: DarkRP.createDemoteGroup("Gangsters", {TEAM_GANG, TEAM_MOB})
+DarkRP.createDemoteGroup("Cops", {TEAM_POLICE, TEAM_CHIEF})
+DarkRP.createDemoteGroup("Mafia", {TEAM_MAFIA, TEAM_GODFATHER})
+DarkRP.createDemoteGroup("Terrorists", {TEAM_TERROR, TEAM_TERRORLEADER})
+DarkRP.createDemoteGroup("Nazis", {TEAM_NAZI, TEAM_HITLER})

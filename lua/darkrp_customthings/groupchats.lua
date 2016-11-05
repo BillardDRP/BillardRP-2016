@@ -14,5 +14,8 @@ GAMEMODE:AddGroupChat(a function with ply as argument that returns whether a ran
 This is for people who know how to script Lua.
 
 ---------------------------------------------------------------------------]]
--- Example: GAMEMODE:AddGroupChat(TEAM_MOB, TEAM_GANG)
--- Example: GAMEMODE:AddGroupChat(function(ply) return ply:isCP() end)
+
+GAMEMODE:AddGroupChat(TEAM_MAYOR, TEAM_CHIEF, TEAM_POLICE)
+GAMEMODE:AddGroupChat(TEAM_GODFATHER, TEAM_MAFIA)
+GAMEMODE:AddGroupChat(TEAM_TERRORLEADER, TEAM_TERROR)
+GAMEMODE:AddGroupChat(TEAM_HITLER, TEAM_NAZI)
