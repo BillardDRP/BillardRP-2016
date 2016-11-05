@@ -62,6 +62,7 @@ EasyCategory("jobs", "Special", Color(255, 0, 255))
 EasyCategory("entities", "Contraband", Color(0, 107, 0))
 EasyCategory("entities", "Drugs", Color(0, 107, 0))
 EasyCategory("entities", "Medical", Color(0, 107, 0))
+EasyCategory("entities", "Beverages", Color(0, 107, 0))
 
 EasyCategory("shipments", "Submachine Guns", Color(0, 107, 0), true)
 EasyCategory("shipments", "Sniper Rifles", Color(0, 107, 0), true)

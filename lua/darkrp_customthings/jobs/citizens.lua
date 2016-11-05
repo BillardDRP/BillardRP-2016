@@ -36,13 +36,43 @@ TEAM_DOCTOR = DarkRP.createJob("Doctor", {
         Left click with the Medical Kit to heal other players.
         Right click with the Medical Kit to heal yourself.]],
     weapons = {"med_kit"},
-    command = "medic",
+    command = "doctor",
     max = 3,
     salary = GAMEMODE.Config.normalsalary,
     admin = 0,
     vote = false,
     hasLicense = false,
     medic = true,
+    category = g_RegisterJobWithCategory,
+})
+
+TEAM_BAR = DarkRP.createJob("Bartender", {
+    color = g_RegisterJobWithColor,
+    model = "models/player/mossman.mdl",
+    description = [[Bartenders sell beverages to people.
+        They can set up a bar or roam around.]],
+    weapons = {},
+    command = "bartender",
+    max = 4,
+    salary = GAMEMODE.Config.normalsalary,
+    admin = 0,
+    vote = false,
+    hasLicense = false,
+    category = g_RegisterJobWithCategory,
+})
+
+TEAM_LAWYER = DarkRP.createJob("Lawyer", {
+    color = g_RegisterJobWithColor,
+    model = "models/player/gman_high.mdl",
+    description = [[Lawyers use their knowledge of the law to release people from jail.
+        Releasing people from jail is perfectly legal.]],
+    weapons = {},
+    command = "lawyer",
+    max = 4,
+    salary = GAMEMODE.Config.normalsalary * 1.5,
+    admin = 0,
+    vote = false,
+    hasLicense = false,
     category = g_RegisterJobWithCategory,
 })
 
