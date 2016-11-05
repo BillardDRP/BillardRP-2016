@@ -2,8 +2,9 @@
 local m_Max = 4
 
 local function EasyEntity(cls, cost, com, cat, who)
-	if not scripted_ents.Get(cls) then
+	if type(scripted_ents.Get(cls)) ~= "table" then
 		ErrorNoHalt("[DarkRP] Entity class " .. cls .. " is invalid!")
+		return
 	end
 	if who == nil then
 		DarkRP.createEntity(scripted_ents.Get(cls).PrintName or "ERROR NAME", {
@@ -46,6 +47,8 @@ http://wiki.darkrp.com/index.php/DarkRP:CustomEntityFields
 Add entities under the following line:
 ---------------------------------------------------------------------------]]
 
+hook.Add("InitPostEntity", "RegisterMoreDarkRPEntities", function()
+
 EasyEntity("zig_printer_topaz", 10000, "topazprinter", "Printers")
 EasyEntity("zig_printer_amethyst", 20000, "amethystprinter", "Printers")
 EasyEntity("zig_printer_emerald", 30000, "emeraldprinter", "Printers")
@@ -69,3 +72,5 @@ EasyEntity("cityrp_kevlar", 12000, "kevlar", "Black Market", TEAM_BLACKMARKET)
 EasyEntity("cityrp_c4", 60000, "c4", "Black Market", TEAM_BLACKMARKET)
 
 EasyEntity("cityrp_defuser", 60000, "defuser", "Government Issue Supplies", {TEAM_MAYOR, TEAM_CHIEF, TEAM_POLICE})
+
+end)

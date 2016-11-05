@@ -35,9 +35,9 @@ Add new categories under the next line!
 
 EasyCategory("jobs", "Citizens", Color(0, 255, 0))
 EasyCategory("jobs", "Criminals", Color(255, 0, 0))
-EasyCategory("jobs", "Dealers", Color(0, 255, 255))
+EasyCategory("jobs", "Salesmen", Color(30, 190, 120))
 EasyCategory("jobs", "Police", Color(0, 0, 255))
-EasyCategory("jobs", "Hobos", Color(255, 255, 0))
+EasyCategory("jobs", "Homeless", Color(100, 60, 20))
 EasyCategory("jobs", "Special", Color(255, 0, 255))
 
 EasyCategory("entities", "Printers", Color(0, 107, 0))

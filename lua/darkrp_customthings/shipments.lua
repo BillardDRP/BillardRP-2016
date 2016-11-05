@@ -1,7 +1,8 @@
 
 local function WeaponShipment(who, cat, wep, cost)
-	if not weapons.Get(wep) then
+	if type(weapons.Get(wep)) ~= "table" then
 		ErrorNoHalt("[DarkRP] Shipment class " .. wep .. " is invalid!")
+		return
 	end
 	local name = weapons.Get(wep).PrintName or "ERROR NAME"
 	if string.lower(string.Left(name, 4)) == "alt " then
@@ -20,8 +21,9 @@ local function WeaponShipment(who, cat, wep, cost)
 end
 
 local function EntityShipment(who, cat, what, cost, mdl)
-	if not scripted_ents.Get(what) then
+	if type(scripted_ents.Get(what)) ~= "table" then
 		ErrorNoHalt("[DarkRP] Shipment class " .. what .. " is invalid!")
+		return
 	end
 	DarkRP.createShipment(scripted_ents.Get(what).PrintName or "ERROR NAME", {
 		model = mdl,
@@ -54,6 +56,8 @@ http://wiki.darkrp.com/index.php/DarkRP:CustomShipmentFields
 
 Add shipments and guns under the following line:
 ---------------------------------------------------------------------------]]
+
+hook.Add("InitPostEntity", "RegisterMoreDarkRPShipments", function()
 
 WeaponShipment(TEAM_GUN, "Pistols", "tfcss_p228_alt", 600)
 WeaponShipment(TEAM_GUN, "Pistols", "tfcss_fiveseven_alt", 800)
@@ -94,3 +98,5 @@ EntityShipment(TEAM_DRUG, "Drugs", "durgz_lsd", 1400, "models/smile/smile.mdl")
 EntityShipment(TEAM_DRUG, "Drugs", "durgz_pcp", 1600, "models/marioragdoll/Super Mario Galaxy/star/star.mdl")
 EntityShipment(TEAM_DRUG, "Drugs", "durgz_heroine", 1800, "models/katharsmodels/syringe_out/syringe_out.mdl")
 EntityShipment(TEAM_DRUG, "Drugs", "durgz_cocaine", 2000, "models/cocn.mdl")
+
+end)
