@@ -66,7 +66,7 @@ http://wiki.darkrp.com/index.php/DarkRP:CustomShipmentFields
 Add shipments and guns under the following line:
 ---------------------------------------------------------------------------]]
 
-hook.Add("InitPostEntity", "RegisterMoreDarkRPShipments", function()
+local function DoShipments()
 
 WeaponShipment(TEAM_GUN, "Pistols", "tfcss_p228_alt", 600)
 WeaponShipment(TEAM_GUN, "Pistols", "tfcss_fiveseven_alt", 800)
@@ -114,4 +114,10 @@ EntityShipment(TEAM_DRUG, "Drugs", "durgz_pcp", 1600, "models/marioragdoll/Super
 EntityShipment(TEAM_DRUG, "Drugs", "durgz_heroine", 1800, "models/katharsmodels/syringe_out/syringe_out.mdl")
 EntityShipment(TEAM_DRUG, "Drugs", "durgz_cocaine", 2000, "models/cocn.mdl")
 
-end)
+end
+
+if refresh then
+	DoShipments()
+else
+	hook.Add("InitPostEntity", "RegisterMoreDarkRPShipments", DoShipments)
+end

@@ -482,7 +482,7 @@ TEAM_SHITTYSTARWARSCOSPLAYER = DarkRP.createJob("Star Wars Cosplayer", {
 	description = [[You think you are cool.
 		You carry around a small blue plastic lightsaber.
 		You are free to hit people, but they can kill you if you do.]],
-	weapons = {},
+	weapons = {"stunstick"},
 	command = "starwarscosplayer",
 	max = 1,
 	salary = GAMEMODE.Config.normalsalary,

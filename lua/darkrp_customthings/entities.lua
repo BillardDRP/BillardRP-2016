@@ -1,4 +1,5 @@
 
+local refresh = false
 local m_Max = 4
 
 local function EasyEntity(cls, cost, com, cat, who)
@@ -47,7 +48,7 @@ http://wiki.darkrp.com/index.php/DarkRP:CustomEntityFields
 Add entities under the following line:
 ---------------------------------------------------------------------------]]
 
-hook.Add("InitPostEntity", "RegisterMoreDarkRPEntities", function()
+local function DoEntities()
 
 EasyEntity("zig_printer_topaz", 10000, "topazprinter", "Printers")
 EasyEntity("zig_printer_amethyst", 20000, "amethystprinter", "Printers")
@@ -73,4 +74,10 @@ EasyEntity("cityrp_c4", 60000, "c4", "Black Market", TEAM_BLACKMARKET)
 
 EasyEntity("cityrp_defuser", 60000, "defuser", "Government Issue Supplies", {TEAM_MAYOR, TEAM_CHIEF, TEAM_POLICE})
 
-end)
+end
+
+if refresh then
+	DoEntities()
+else
+	hook.Add("InitPostEntity", "RegisterMoreDarkRPEntities", DoEntities)
+end
