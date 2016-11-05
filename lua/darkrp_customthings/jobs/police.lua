@@ -8,7 +8,7 @@ TEAM_POLICE = DarkRP.createJob("Police Officer", {
         The Battering Ram can break down the door of a criminal, with a warrant for their arrest.
         The Battering Ram can also unfreeze frozen props (if enabled).
         Type /wanted <name> to alert the public to the presence of a criminal.]],
-    weapons = {"arrest_stick", "unarrest_stick", "tfa_colt1911", "stunstick", "door_ram", "weaponchecker"},
+    weapons = {"arrest_stick", "unarrest_stick", "tfcss_usp_alt", "stunstick", "door_ram", "weaponchecker"},
     command = "cp",
     max = 4,
     salary = GAMEMODE.Config.normalsalary * 1.5,
@@ -31,7 +31,7 @@ TEAM_CHIEF = DarkRP.createJob("Police Chief", {
         The Battering Ram can break down the door of a criminal, with a warrant for his/her arrest.
         Type /wanted <name> to alert the public to the presence of a criminal.
         Type /jailpos to set the Jail Position]],
-    weapons = {"arrest_stick", "unarrest_stick", "tfa_colt1911", "tfa_mp5", "stunstick", "door_ram", "weaponchecker"},
+    weapons = {"arrest_stick", "unarrest_stick", "tfcss_usp_alt", "tfcss_mp5_alt", "stunstick", "door_ram", "weaponchecker"},
     command = "chief",
     max = 1,
     salary = GAMEMODE.Config.normalsalary * 1.75,
