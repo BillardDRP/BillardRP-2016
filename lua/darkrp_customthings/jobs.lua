@@ -394,7 +394,7 @@ TEAM_POLICE = DarkRP.createJob("Police Officer", {
 		The Battering Ram can also unfreeze frozen props (if enabled).
 		Type /wanted <name> to alert the public to the presence of a criminal.]],
 	weapons = {"arrest_stick", "unarrest_stick", "tfcss_usp_alt", "stunstick", "door_ram", "weaponchecker"},
-	command = "cp",
+	command = "police",
 	max = 8,
 	salary = GAMEMODE.Config.normalsalary * 1.5,
 	admin = 0,

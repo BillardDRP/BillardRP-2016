@@ -101,6 +101,7 @@ WeaponShipment(TEAM_BLACKMARKET, "Black Market", "keypad_cracker", 2400)
 WeaponShipment(TEAM_BLACKMARKET, "Black Market", "med_kit", 3600)
 WeaponShipment(TEAM_BLACKMARKET, "Black Market", "unarrest_stick", 9800)
 WeaponShipment(TEAM_BLACKMARKET, "Black Market", "tfcss_css_c4_alt", 20000)
+WeaponShipment(TEAM_BLACKMARKET, "Black Market", "tfcss_m249_alt", 16000)
 
 WeaponShipment(TEAM_VAPE, "Vapes", "weapon_vape", 1000)
 WeaponShipment(TEAM_VAPE, "Vapes", "weapon_vape_juicy", 5000)
