@@ -20,7 +20,7 @@ local function WeaponShipment(who, cat, wep, cost)
 	})
 end
 
-local function EntityShipment(who, cat, what, cost, mdl)
+local function EntityShipment(who, cat, what, com, cost, mdl)
 	if type(scripted_ents.Get(what)) ~= "table" then
 		ErrorNoHalt("[DarkRP] Shipment class " .. what .. " is invalid!")
 		return
@@ -100,24 +100,25 @@ WeaponShipment(TEAM_BLACKMARKET, "Black Market", "keypad_cracker", 2400)
 WeaponShipment(TEAM_BLACKMARKET, "Black Market", "med_kit", 3600)
 WeaponShipment(TEAM_BLACKMARKET, "Black Market", "unarrest_stick", 9800)
 
-EntityShipment(TEAM_DOCTOR, "Medical", "durgz_aspirin", 1200, "models/jaanus/aspbtl.mdl")
-EntityShipment(TEAM_DOCTOR, "Medical", "cityrp_medkit", 1000, "models/Items/HealthKit.mdl")
+EntityShipment(TEAM_DOCTOR, "Medical", "durgz_aspirin", "aspirin", 1200, "models/jaanus/aspbtl.mdl")
+EntityShipment(TEAM_DOCTOR, "Medical", "cityrp_medkit", "medicalkit", 1000, "models/Items/HealthKit.mdl")
 
-EntityShipment(TEAM_BAR, "Beverages", "durgz_alcohol", 400, "models/drug_mod/alcohol_can.mdl")
-EntityShipment(TEAM_BAR, "Beverages", "durgz_water", 200, "models/drug_mod/the_bottle_of_water.mdl")
+EntityShipment(TEAM_BAR, "Beverages", "durgz_alcohol", "alcohol", 400, "models/drug_mod/alcohol_can.mdl")
+EntityShipment(TEAM_BAR, "Beverages", "durgz_water", "water", 200, "models/drug_mod/the_bottle_of_water.mdl")
 
-EntityShipment(TEAM_DRUG, "Drugs", "durgz_weed", 800, "models/katharsmodels/contraband/zak_wiet/zak_wiet.mdl")
-EntityShipment(TEAM_DRUG, "Drugs", "durgz_mushroom", 1000, "models/ipha/mushroom_small.mdl")
-EntityShipment(TEAM_DRUG, "Drugs", "durgz_meth", 1200, "models/katharsmodels/contraband/metasync/blue_sky.mdl")
-EntityShipment(TEAM_DRUG, "Drugs", "durgz_lsd", 1400, "models/smile/smile.mdl")
-EntityShipment(TEAM_DRUG, "Drugs", "durgz_pcp", 1600, "models/marioragdoll/Super Mario Galaxy/star/star.mdl")
-EntityShipment(TEAM_DRUG, "Drugs", "durgz_heroine", 1800, "models/katharsmodels/syringe_out/syringe_out.mdl")
-EntityShipment(TEAM_DRUG, "Drugs", "durgz_cocaine", 2000, "models/cocn.mdl")
+EntityShipment(TEAM_DRUG, "Drugs", "durgz_weed", "weed", 800, "models/katharsmodels/contraband/zak_wiet/zak_wiet.mdl")
+EntityShipment(TEAM_DRUG, "Drugs", "durgz_mushroom", "mushrooms", 1000, "models/ipha/mushroom_small.mdl")
+EntityShipment(TEAM_DRUG, "Drugs", "durgz_meth", "meth", 1200, "models/katharsmodels/contraband/metasync/blue_sky.mdl")
+EntityShipment(TEAM_DRUG, "Drugs", "durgz_lsd", "lsd", 1400, "models/smile/smile.mdl")
+EntityShipment(TEAM_DRUG, "Drugs", "durgz_pcp", "pcp", 1600, "models/marioragdoll/Super Mario Galaxy/star/star.mdl")
+EntityShipment(TEAM_DRUG, "Drugs", "durgz_heroine", "heroin", 1800, "models/katharsmodels/syringe_out/syringe_out.mdl")
+EntityShipment(TEAM_DRUG, "Drugs", "durgz_cocaine", "cocaine", 2000, "models/cocn.mdl")
 
 end
 
-if refresh then
+if g_DarkRPExtraShipmentsRefreshed ~= nil then
 	DoShipments()
 else
 	hook.Add("InitPostEntity", "RegisterMoreDarkRPShipments", DoShipments)
+	g_DarkRPExtraShipmentsRefreshed = true
 end

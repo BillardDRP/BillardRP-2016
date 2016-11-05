@@ -1,5 +1,4 @@
 
-local refresh = false
 local m_Max = 4
 
 local function EasyEntity(cls, cost, com, cat, who)
@@ -76,8 +75,9 @@ EasyEntity("cityrp_defuser", 60000, "defuser", "Government Issue Supplies", {TEA
 
 end
 
-if refresh then
+if g_DarkRPExtraEntitiesRefreshed ~= nil then
 	DoEntities()
 else
 	hook.Add("InitPostEntity", "RegisterMoreDarkRPEntities", DoEntities)
+	g_DarkRPExtraEntitiesRefreshed = true
 end
