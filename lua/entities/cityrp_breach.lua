@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 ENT.Type = "anim"
 ENT.Base = "cityrp_base"
-ENT.PrintName = "C4"
+ENT.PrintName = "Breaching Charge"
 ENT.Category = "CityRP"
 ENT.Spawnable = true
 ENT.Model = "models/weapons/w_c4_planted.mdl"

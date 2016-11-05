@@ -95,10 +95,12 @@ WeaponShipment(TEAM_GUN, "Snipers", "tfcss_g3sg1_alt", 6400)
 WeaponShipment(TEAM_GUN, "Snipers", "tfcss_sg550_alt", 6800)
 WeaponShipment(TEAM_GUN, "Snipers", "tfcss_awp_alt", 7200)
 
+WeaponShipment(TEAM_BLACKMARKET, "Black Market", "tfcss_css_knife_alt", 2400)
 WeaponShipment(TEAM_BLACKMARKET, "Black Market", "lockpick", 4200)
 WeaponShipment(TEAM_BLACKMARKET, "Black Market", "keypad_cracker", 2400)
 WeaponShipment(TEAM_BLACKMARKET, "Black Market", "med_kit", 3600)
 WeaponShipment(TEAM_BLACKMARKET, "Black Market", "unarrest_stick", 9800)
+WeaponShipment(TEAM_BLACKMARKET, "Black Market", "tfcss_css_c4_alt", 20000)
 
 EntityShipment(TEAM_DOCTOR, "Medical", "durgz_aspirin", "aspirin", 1200, "models/jaanus/aspbtl.mdl")
 EntityShipment(TEAM_DOCTOR, "Medical", "cityrp_medkit", "medicalkit", 1000, "models/Items/HealthKit.mdl")
