@@ -48,6 +48,9 @@ EasyCategory("entities", "Government Issue Supplies", Color(0, 107, 0))
 EasyCategory("shipments", "Drugs", Color(0, 107, 0))
 EasyCategory("shipments", "Medical", Color(0, 107, 0))
 EasyCategory("shipments", "Beverages", Color(0, 107, 0))
-EasyCategory("shipments", "Submachine Guns", Color(0, 107, 0), true)
 
-EasyCategory("weapons", "Submachine Guns", Color(0, 107, 0), true)
+EasyCategory("shipments", "Pistols", Color(0, 107, 0))
+EasyCategory("shipments", "Submachine Guns", Color(0, 107, 0))
+
+EasyCategory("weapons", "Pistols", Color(0, 107, 0))
+EasyCategory("weapons", "Submachine Guns", Color(0, 107, 0))

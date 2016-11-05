@@ -2,7 +2,7 @@
 local g_RegisterJobWithColor
 local g_RegisterJobWithCategory
 
-local function RegisterJobCategory(id, name, color)
+local function RegisterJobCategory(name, color)
 	g_RegisterJobWithColor = color or Color(255, 0, 0)
 	g_RegisterJobWithCategory = name or "Other"
 end
