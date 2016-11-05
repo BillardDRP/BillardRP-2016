@@ -1,11 +1,11 @@
 
 local function WeaponShipment(who, cat, wep, cost)
-	local name = weapons.Get(wep).PrintName
+	local name = weapons.Get(wep).PrintName or "ERROR NAME"
 	if string.lower(string.Left(name, 4)) == "alt " then
 		name = string.sub(name, 5)
 	end
 	DarkRP.createShipment(name, {
-		model = weapons.Get(wep).WorldModel,
+		model = weapons.Get(wep).WorldModel or "models/props_junk/watermelon01.mdl",
 		entity = wep,
 		price = cost * 10,
 		amount = 10,
@@ -17,7 +17,7 @@ local function WeaponShipment(who, cat, wep, cost)
 end
 
 local function EntityShipment(who, cat, what, cost, mdl)
-	DarkRP.createShipment(scripted_ents.Get(what).PrintName, {
+	DarkRP.createShipment(scripted_ents.Get(what).PrintName or "ERROR NAME", {
 		model = mdl,
 		entity = what,
 		price = cost * 10,

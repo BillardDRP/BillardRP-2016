@@ -3,18 +3,18 @@ local m_Max = 4
 
 local function EasyEntity(cls, cost, com, cat, who)
 	if who == nil then
-		DarkRP.createEntity(scripted_ents.Get(cls).PrintName, {
+		DarkRP.createEntity(scripted_ents.Get(cls).PrintName or "ERROR NAME", {
 			ent = cls,
-			model = scripted_ents.Get(cls).Model,
+			model = scripted_ents.Get(cls).Model or "models/props_junk/watermelon01.mdl",
 			price = cost,
 			max = m_Max,
 			cmd = "buy" .. com,
 			category = cat,
 		})
 	else
-		DarkRP.createEntity(scripted_ents.Get(cls).PrintName, {
+		DarkRP.createEntity(scripted_ents.Get(cls).PrintName or "ERROR NAME", {
 			ent = cls,
-			model = scripted_ents.Get(cls).Model,
+			model = scripted_ents.Get(cls).Model or "models/props_junk/watermelon01.mdl",
 			price = cost,
 			max = m_Max,
 			cmd = "buy" .. com,

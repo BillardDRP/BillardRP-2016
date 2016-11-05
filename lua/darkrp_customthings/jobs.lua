@@ -26,9 +26,9 @@ Add jobs under the following line:
 
 RegisterJobCategory("citizens", "Citizens", Color(0, 255, 0))
 RegisterJobCategory("crime", "Criminals", Color(255, 0, 0))
-RegisterJobCategory("dealers", "Salesmen", Color(0, 255, 255))
+RegisterJobCategory("dealers", "Salesmen", Color(30, 190, 120))
+RegisterJobCategory("hobos", "Unemployed", Color(100, 60, 20))
 RegisterJobCategory("police", "Civil Protection", Color(0, 0, 255))
-RegisterJobCategory("hobos", "Unemployed", Color(255, 255, 0))
 RegisterJobCategory("special", "Special", Color(255, 0, 255))
 
 --[[---------------------------------------------------------------------------
