@@ -96,6 +96,36 @@ TEAM_BAR = DarkRP.createJob("Bartender", {
 	category = g_RegisterJobWithCategory,
 })
 
+TEAM_DJ = DarkRP.createJob("DJ", {
+	color = g_RegisterJobWithColor,
+	model = "models/player/odessa.mdl",
+	description = [[DJs are allowed to play music.
+		They can set up a club or roam around.]],
+	weapons = {},
+	command = "dj",
+	max = 4,
+	salary = GAMEMODE.Config.normalsalary,
+	admin = 0,
+	vote = false,
+	hasLicense = false,
+	category = g_RegisterJobWithCategory,
+})
+
+TEAM_BANKER = DarkRP.createJob("Banker", {
+	color = g_RegisterJobWithColor,
+	model = "models/player/magnusson.mdl",
+	description = [[Bankers can legally own money printers.
+		Bankers loan money to people and allow pople to invest in a money printer business.]],
+	weapons = {},
+	command = "banker",
+	max = 6,
+	salary = GAMEMODE.Config.normalsalary,
+	admin = 0,
+	vote = false,
+	hasLicense = false,
+	category = g_RegisterJobWithCategory,
+})
+
 TEAM_LAWYER = DarkRP.createJob("Lawyer", {
 	color = g_RegisterJobWithColor,
 	model = "models/player/gman_high.mdl",
@@ -113,7 +143,7 @@ TEAM_LAWYER = DarkRP.createJob("Lawyer", {
 
 TEAM_GUARD = DarkRP.createJob("Guard", {
 	color = g_RegisterJobWithColor,
-	model = {"models/player/barney.mdl"},
+	model = "models/player/barney.mdl",
 	description = [[Guards can be paid to protect certain areas or people.]],
 	weapons = {"tfa_sig_p229r", "stunstick"},
 	command = "guard",
@@ -130,7 +160,7 @@ TEAM_GUARD = DarkRP.createJob("Guard", {
 CRIMINALS
 ---------------------------------------------------------------------------]]
 
-RegisterJobCategory("Criminals", Color(255, 0, 0))
+RegisterJobCategory("Criminals", Color(0, 0, 0))
 
 TEAM_MAFIA = DarkRP.createJob("Mafia", {
 	color = g_RegisterJobWithColor,
@@ -193,6 +223,20 @@ TEAM_THIEF = DarkRP.createJob("Thief", {
 	category = g_RegisterJobWithCategory,
 })
 
+TEAM_LOOTER = DarkRP.createJob("Looter", {
+	color = g_RegisterJobWithColor,
+	model = {"models/player/phoenix.mdl", "models/player/arctic.mdl"},
+	description = [[Looters can raid without cooldown.]],
+	weapons = {},
+	command = "looter",
+	max = 6,
+	salary = GAMEMODE.Config.normalsalary,
+	admin = 0,
+	vote = false,
+	hasLicense = false,
+	category = g_RegisterJobWithCategory,
+})
+
 TEAM_HACKER = DarkRP.createJob("Hacker", {
 	color = g_RegisterJobWithColor,
 	model = "models/player/magnusson.mdl",
@@ -200,6 +244,27 @@ TEAM_HACKER = DarkRP.createJob("Hacker", {
 	weapons = {"keypad_cracker"},
 	command = "hacker",
 	max = 6,
+	salary = GAMEMODE.Config.normalsalary,
+	admin = 0,
+	vote = false,
+	hasLicense = false,
+	category = g_RegisterJobWithCategory,
+})
+
+--[[---------------------------------------------------------------------------
+KILLERS
+---------------------------------------------------------------------------]]
+
+RegisterJobCategory("Killers", Color(255, 0, 0))
+
+TEAM_HITMAN = DarkRP.createJob("Hitman", {
+	color = g_RegisterJobWithColor,
+	model = "models/player/leet.mdl",
+	description = [[Hitmen are paid to kill.
+		However, killing is still illegal.]],
+	weapons = {"tfa_m24"},
+	command = "hitman",
+	max = 2,
 	salary = GAMEMODE.Config.normalsalary,
 	admin = 0,
 	vote = false,
@@ -314,12 +379,13 @@ TEAM_DRUG = DarkRP.createJob("Drug Dealer", {
 	category = g_RegisterJobWithCategory,
 })
 
-TEAM_VAPE = DarkRP.createJob("Vape Dealer", {
+TEAM_VAPE = DarkRP.createJob("Vape Lord", {
 	color = g_RegisterJobWithColor,
-	model = "models/player/soldier_stripped.mdl",
-	description = [[Vape dealers sell vapes so people can rip fat clouds.]],
+	model = "models/player/skeleton.mdl",
+	description = [[Vape lords sell vapes so people can rip fat clouds.
+		Don't let anyone beat you in a vape battle!]],
 	weapons = {},
-	command = "vapedealer",
+	command = "vapelord",
 	max = 4,
 	salary = GAMEMODE.Config.normalsalary,
 	admin = 0,
@@ -390,6 +456,23 @@ TEAM_SUPERHOBO = DarkRP.createJob("Super Hobo", {
 	category = g_RegisterJobWithCategory,
 })
 
+TEAM_SEWER = DarkRP.createJob("Sewer Monster", {
+	color = g_RegisterJobWithColor,
+	model = "models/player/zombie_soldier.mdl",
+	description = [[Wait, there isn't even a sewer.
+		How did you get here?
+		I guess you just walk around and kill people?]],
+	weapons = {"weapon_bugbait"},
+	command = "sewermonster",
+	max = 1,
+	salary = 0,
+	admin = 0,
+	vote = false,
+	hasLicense = false,
+	candemote = false,
+	hobo = true,
+	category = g_RegisterJobWithCategory,
+})
 
 --[[---------------------------------------------------------------------------
 POLICE
@@ -429,17 +512,35 @@ TEAM_CHIEF = DarkRP.createJob("Police Chief", {
 		Bash a player with a stunstick and they may learn to obey the law.
 		The Battering Ram can break down the door of a criminal, with a warrant for his/her arrest.
 		Type /wanted <name> to alert the public to the presence of a criminal.
-		Type /jailpos to set the Jail Position]],
+		Type /jailpos to set the Jail Position.]],
 	weapons = {"arrest_stick", "unarrest_stick", "tfa_sig_p229r", "tfa_mp5", "stunstick", "door_ram", "weaponchecker"},
 	command = "chief",
 	max = 1,
 	salary = GAMEMODE.Config.normalsalary * 1.75,
 	admin = 0,
-	vote = false,
+	vote = true,
 	hasLicense = true,
 	chief = true,
 	ammo = {
 		["pistol"] = 60,
+	},
+	category = g_RegisterJobWithCategory,
+})
+
+TEAM_WOODY = DarkRP.createJob("Sheriff Woody", {
+	color = g_RegisterJobWithColor,
+	model = "models/player/woody.mdl",
+	description = [[There is a snake in your boot.]],
+	weapons = {"arrest_stick", "unarrest_stick", "tfa_remington1858", "stunstick", "door_ram", "weaponchecker"},
+	command = "woody",
+	max = 1,
+	salary = GAMEMODE.Config.normalsalary * 1.5,
+	admin = 0,
+	vote = true,
+	hasLicense = true,
+	chief = true,
+	ammo = {
+		["357"] = 60,
 	},
 	category = g_RegisterJobWithCategory,
 })
@@ -454,7 +555,7 @@ TEAM_MAYOR = DarkRP.createJob("Mayor", {
 	Type /lockdown initiate a lockdown of the city.
 	Everyone must be inside during a lockdown.
 	The cops patrol the area.
-	/unlockdown to end a lockdown]],
+	Type /unlockdown to end a lockdown.]],
 	weapons = {},
 	command = "mayor",
 	max = 1,
@@ -542,6 +643,22 @@ TEAM_FEMINIST = DarkRP.createJob("Feminist", {
 	command = "feminist",
 	max = 4,
 	salary = GAMEMODE.Config.normalsalary,
+	admin = 0,
+	vote = false,
+	hasLicense = false,
+	category = g_RegisterJobWithCategory,
+})
+
+TEAM_DAUGHTER = DarkRP.createJob("Mayor's Daughter", {
+	color = g_RegisterJobWithColor,
+	model = {"models/player/alyx.mdl"},
+	description = [[You are the mayor's daughter.
+		You are just like a citizen but richer.
+		Watch out though, getting kidnapped will force the mayor to pay a ransom to get you back!]],
+	weapons = {""},
+	command = "daughter",
+	max = 1,
+	salary = GAMEMODE.Config.normalsalary * 1.75,
 	admin = 0,
 	vote = false,
 	hasLicense = false,
