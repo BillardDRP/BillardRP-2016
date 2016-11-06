@@ -115,7 +115,7 @@ TEAM_GUARD = DarkRP.createJob("Guard", {
 	color = g_RegisterJobWithColor,
 	model = {"models/player/barney.mdl"},
 	description = [[Guards can be paid to protect certain areas or people.]],
-	weapons = {"tfcss_usp_alt", "stunstick"},
+	weapons = {"tfa_sig_p229r", "stunstick"},
 	command = "guard",
 	max = 0,
 	salary = GAMEMODE.Config.normalsalary,
@@ -165,10 +165,10 @@ TEAM_MAFIA = DarkRP.createJob("Mafia", {
 TEAM_GODFATHER = DarkRP.createJob("Godfather", {
 	color = g_RegisterJobWithColor,
 	model = "models/player/gman_high.mdl",
-	description = [[The Mob boss is the boss of the criminals in the city.
-		With his power he coordinates the gangsters and forms an efficient crime organization.
+	description = [[The Godfather is the boss of the mafia in the city.
+		With his power he coordinates the mafia and forms an efficient crime organization.
 		He has the ability to break into houses by using a lockpick.
-		The Mob boss posesses the ability to unarrest you.]],
+		The Godfather posesses the ability to unarrest you.]],
 	weapons = {"lockpick", "unarrest_stick"},
 	command = "godfather",
 	max = 1,
@@ -211,7 +211,7 @@ TEAM_TERROR = DarkRP.createJob("Terrorist", {
 	color = g_RegisterJobWithColor,
 	model = "models/player/guerilla.mdl",
 	description = [[Terrorists spread terror throughout the city and are in a constant war with the government.]],
-	weapons = {"tfcss_ak47_alt"},
+	weapons = {"tfa_ak47"},
 	command = "terrorist",
 	max = 6,
 	salary = GAMEMODE.Config.normalsalary,
@@ -225,7 +225,7 @@ TEAM_TERRORLEADER = DarkRP.createJob("Terrorist Leader", {
 	color = g_RegisterJobWithColor,
 	model = "models/player/guerilla.mdl",
 	description = [[The terrorist leader leads the terrorists in their war against the government.]],
-	weapons = {"tfcss_ak47_alt"},
+	weapons = {"tfa_ak47"},
 	command = "terroristleader",
 	max = 1,
 	salary = GAMEMODE.Config.normalsalary,
@@ -378,7 +378,7 @@ TEAM_SUPERHOBO = DarkRP.createJob("Super Hobo", {
 		You can lead the hobos to a rebellion against the government.
 		You carry a bent paperclip that can be used to pick locks.
 		You also carry a BB gun your father gave you before he died.]],
-	weapons = {"tfcss_p228_alt", "lockpick", "weapon_bugbait"},
+	weapons = {"tfa_sig_p229r", "lockpick", "weapon_bugbait"},
 	command = "superhobo",
 	max = 1,
 	salary = 0,
@@ -407,7 +407,7 @@ TEAM_POLICE = DarkRP.createJob("Police Officer", {
 		The Battering Ram can break down the door of a criminal, with a warrant for their arrest.
 		The Battering Ram can also unfreeze frozen props (if enabled).
 		Type /wanted <name> to alert the public to the presence of a criminal.]],
-	weapons = {"arrest_stick", "unarrest_stick", "tfcss_usp_alt", "stunstick", "door_ram", "weaponchecker"},
+	weapons = {"arrest_stick", "unarrest_stick", "tfa_sig_p229r", "stunstick", "door_ram", "weaponchecker"},
 	command = "police",
 	max = 8,
 	salary = GAMEMODE.Config.normalsalary * 1.5,
@@ -430,7 +430,7 @@ TEAM_CHIEF = DarkRP.createJob("Police Chief", {
 		The Battering Ram can break down the door of a criminal, with a warrant for his/her arrest.
 		Type /wanted <name> to alert the public to the presence of a criminal.
 		Type /jailpos to set the Jail Position]],
-	weapons = {"arrest_stick", "unarrest_stick", "tfcss_usp_alt", "tfcss_mp5_alt", "stunstick", "door_ram", "weaponchecker"},
+	weapons = {"arrest_stick", "unarrest_stick", "tfa_sig_p229r", "tfa_mp5", "stunstick", "door_ram", "weaponchecker"},
 	command = "chief",
 	max = 1,
 	salary = GAMEMODE.Config.normalsalary * 1.75,
