@@ -285,6 +285,20 @@ TEAM_GUN = DarkRP.createJob("Gun Dealer", {
 	category = g_RegisterJobWithCategory,
 })
 
+TEAM_BADASS = DarkRP.createJob("Badass Weapon Dealer", {
+	color = g_RegisterJobWithColor,
+	model = "models/player/monk.mdl",
+	description = [[Badass weapon dealers sell badass weapons for high prices.]],
+	weapons = {},
+	command = "badass",
+	max = 4,
+	salary = GAMEMODE.Config.normalsalary,
+	admin = 0,
+	vote = false,
+	hasLicense = false,
+	category = g_RegisterJobWithCategory,
+})
+
 TEAM_DRUG = DarkRP.createJob("Drug Dealer", {
 	color = g_RegisterJobWithColor,
 	model = "models/player/soldier_stripped.mdl",
