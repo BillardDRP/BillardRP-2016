@@ -34,8 +34,8 @@ Add new categories under the next line!
 ---------------------------------------------------------------------------]]
 
 EasyCategory("jobs", "Citizens", Color(0, 255, 0))
-EasyCategory("jobs", "Killers", Color(0, 0, 0))
-EasyCategory("jobs", "Criminals", Color(255, 0, 0))
+EasyCategory("jobs", "Killers", Color(255, 0, 0))
+EasyCategory("jobs", "Criminals", Color(0, 0, 0))
 EasyCategory("jobs", "Salesmen", Color(30, 190, 120))
 EasyCategory("jobs", "Police", Color(0, 0, 255))
 EasyCategory("jobs", "Homeless", Color(100, 60, 20))
@@ -55,6 +55,7 @@ EasyCategory("shipments", "Medical", Color(0, 107, 0))
 EasyCategory("shipments", "Beverages", Color(0, 107, 0))
 EasyCategory("shipments", "Pistols", Color(0, 107, 0))
 EasyCategory("shipments", "Submachine Guns", Color(0, 107, 0))
+EasyCategory("shipments", "Machine Guns", Color(0, 107, 0))
 EasyCategory("shipments", "Assault Rifles", Color(0, 107, 0))
 EasyCategory("shipments", "Sniper Rifles", Color(0, 107, 0))
 EasyCategory("shipments", "Black Market", Color(0, 107, 0))
