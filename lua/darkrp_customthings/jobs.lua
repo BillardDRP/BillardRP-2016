@@ -160,7 +160,7 @@ TEAM_GUARD = DarkRP.createJob("Guard", {
 CRIMINALS
 ---------------------------------------------------------------------------]]
 
-RegisterJobCategory("Criminals", Color(0, 0, 0))
+RegisterJobCategory("Criminals", Color(15, 15, 15))
 
 TEAM_MAFIA = DarkRP.createJob("Mafia", {
 	color = g_RegisterJobWithColor,
