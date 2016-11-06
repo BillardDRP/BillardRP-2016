@@ -262,7 +262,7 @@ TEAM_HITMAN = DarkRP.createJob("Hitman", {
 	model = "models/player/leet.mdl",
 	description = [[Hitmen are paid to kill.
 		However, killing is still illegal.]],
-	weapons = {"tfa_m24"},
+	weapons = {"tfa_contender"},
 	command = "hitman",
 	max = 2,
 	salary = GAMEMODE.Config.normalsalary,

@@ -101,9 +101,9 @@ DarkRP.createAmmoType("SniperPenetratedRound", {
 	amountGiven = 10
 })
 
-DarkRP.createAmmoType("firebombs", {
+DarkRP.createAmmoType("firebomb", {
 	name = "Firebomb",
-	model = "models/items/boxsniperroundz.mdl",
+	model = "models/props_phx/mk-82.mdl",
 	price = 600,
 	amountGiven = 1
 })
