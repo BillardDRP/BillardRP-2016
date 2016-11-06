@@ -15,6 +15,7 @@ local function WeaponShipment(who, cat, wep, cost)
 		amount = 10,
 		separate = true,
 		pricesep = cost,
+		noship = false,
 		allowed = who,
 		category = cat,
 	})
@@ -32,6 +33,7 @@ local function EntityShipment(who, cat, what, com, cost, mdl)
 		amount = 10,
 		separate = false,
 		pricesep = nil,
+		noship = false,
 		allowed = who,
 		category = cat,
 	})
