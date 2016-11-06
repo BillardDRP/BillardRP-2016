@@ -49,12 +49,12 @@ Add entities under the following line:
 
 local function DoEntities()
 
-EasyEntity("zig_printer_topaz", 10000, "topazprinter", "Printers")
-EasyEntity("zig_printer_amethyst", 20000, "amethystprinter", "Printers")
-EasyEntity("zig_printer_emerald", 30000, "emeraldprinter", "Printers")
-EasyEntity("zig_printer_ruby", 40000, "rubyprinter", "Printers")
-EasyEntity("zig_printer_sapphire", 50000, "sapphireprinter", "Printers")
-EasyEntity("zig_printer_diamond", 60000, "diamondprinter", "Printers")
+EasyEntity("zig_printer_topaz", 2500, "topazprinter", "Printers")
+EasyEntity("zig_printer_amethyst", 5000, "amethystprinter", "Printers")
+EasyEntity("zig_printer_emerald", 7500, "emeraldprinter", "Printers")
+EasyEntity("zig_printer_ruby", 10000, "rubyprinter", "Printers")
+EasyEntity("zig_printer_sapphire", 12500, "sapphireprinter", "Printers")
+EasyEntity("zig_printer_diamond", 15000, "diamondprinter", "Printers")
 
 EasyEntity("zig_battery", 2000, "battery", "Printer Accessories")
 EasyEntity("zig_ink", 1000, "ink", "Printer Accessories")
