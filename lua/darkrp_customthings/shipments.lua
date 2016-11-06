@@ -1,5 +1,5 @@
 
-local function WeaponShipment(who, cat, wep, cost)
+local function WeaponShipment(who, cat, wep, amt)
 	if type(weapons.Get(wep)) ~= "table" then
 		ErrorNoHalt("[DarkRP] Shipment class " .. wep .. " is invalid!")
 		return
@@ -11,17 +11,28 @@ local function WeaponShipment(who, cat, wep, cost)
 	DarkRP.createShipment(name, {
 		model = weapons.Get(wep).WorldModel or "models/props_junk/watermelon01.mdl",
 		entity = wep,
-		price = cost * 10,
+		price = amt * 10,
 		amount = 10,
-		separate = true,
-		pricesep = cost,
+		separate = false,
+		pricesep = amt,
 		noship = false,
+		allowed = who,
+		category = cat,
+	})
+	DarkRP.createShipment(name, {
+		model = weapons.Get(wep).WorldModel or "models/props_junk/watermelon01.mdl",
+		entity = wep,
+		price = amt,
+		amount = 1,
+		separate = true,
+		pricesep = amt,
+		noship = true,
 		allowed = who,
 		category = cat,
 	})
 end
 
-local function EntityShipment(who, cat, what, com, cost, mdl)
+local function EntityShipment(who, cat, what, com, amt, mdl)
 	if type(scripted_ents.Get(what)) ~= "table" then
 		ErrorNoHalt("[DarkRP] Shipment class " .. what .. " is invalid!")
 		return
@@ -29,7 +40,7 @@ local function EntityShipment(who, cat, what, com, cost, mdl)
 	DarkRP.createShipment(scripted_ents.Get(what).PrintName or "ERROR NAME", {
 		model = mdl,
 		entity = what,
-		price = cost * 10,
+		price = amt * 10,
 		amount = 10,
 		separate = false,
 		pricesep = nil,
@@ -40,7 +51,7 @@ local function EntityShipment(who, cat, what, com, cost, mdl)
 	DarkRP.createEntity(scripted_ents.Get(what).PrintName or "ERROR NAME", {
 		ent = what,
 		model = mdl,
-		price = cost,
+		price = amt,
 		max = 4,
 		cmd = "buy" .. com,
 		allowed = who,
