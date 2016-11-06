@@ -63,6 +63,7 @@ m_Max = 1
 
 EasyEntity("cityrp_spraycan", 12, "spraycan", "Other")
 EasyEntity("cityrp_battery", 24, "flashlightbattery", "Other")
+EasyEntity("cityrp_radio", 1200, "radio", "Other")
 
 m_Max = 4
 

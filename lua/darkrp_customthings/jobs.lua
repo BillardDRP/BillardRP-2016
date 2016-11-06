@@ -506,6 +506,20 @@ TEAM_SHITTYSTARWARSCOSPLAYER = DarkRP.createJob("Star Wars Cosplayer", {
 	category = g_RegisterJobWithCategory,
 })
 
+TEAM_AXE = DarkRP.createJob("Axe Murderer", {
+	color = g_RegisterJobWithColor,
+	model = "models/player/corpse1.mdl",
+	description = [[You run around killing everyone in sight, but you are always KOS.]],
+	weapons = {"weapon_hl2axe"},
+	command = "axemurderer",
+	max = 1,
+	salary = 0,
+	admin = 0,
+	vote = false,
+	hasLicense = false,
+	category = g_RegisterJobWithCategory,
+})
+
 TEAM_FEMINIST = DarkRP.createJob("Feminist", {
 	color = g_RegisterJobWithColor,
 	model = "models/player/p2_chell.mdl",
