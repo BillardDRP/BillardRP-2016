@@ -1,104 +1,82 @@
 SWEP.PrintName = "Car Bomb Defuser"
-SWEP.Instructions = "Primary fire near where a car bomb is planted to defuse it."
-SWEP.Purpose = "No one is dying today!"
-
-SWEP.Category = "Car Bomb"
-
-SWEP.AdminSpawnable = true
+SWEP.Author = "Sir Francis Billard"
+SWEP.Instructions = "Left click to defuse a car bomb.\nRight click to check if a car has a bomb."
 SWEP.Spawnable = true
 
-SWEP.Primary.ClipSize		= -1
-SWEP.Primary.DefaultClip	= -1
-SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo		= "none"
+SWEP.ViewModel = "models/weapons/v_hands.mdl"
+SWEP.UseHands = false
+SWEP.ViewModelFOV = 60
+SWEP.WorldModel = "models/weapons/w_hands.mdl"
 
-SWEP.Secondary.ClipSize		= -1
-SWEP.Secondary.DefaultClip	= -1
-SWEP.Secondary.Automatic	= false
-SWEP.Secondary.Ammo		= "none"
+SWEP.SwayScale = 1
+SWEP.DrawAmmo = false
+SWEP.Slot = 4
 
-SWEP.UseHands = true
+SWEP.Primary.Ammo = "None"
+SWEP.Primary.ClipSize = -1
+SWEP.Primary.DefaultClip = -1
+SWEP.Primary.Automatic = false
 
-SWEP.DrawAmmo			= false
-SWEP.DrawCrosshair		= true
+SWEP.Secondary.Ammo = "None"
+SWEP.Secondary.ClipSize = -1
+SWEP.Secondary.DefaultClip = -1
+SWEP.Secondary.Automatic = false
 
-SWEP.ViewModelFOV = 55
-SWEP.ViewModelFlip = false
-SWEP.ViewModel = "models/weapons/c_crowbar.mdl"
-SWEP.WorldModel = "models/weapons/w_crowbar.mdl"
-
-function SWEP:PrimaryAttack()
-    if (SERVER) then
-	    local tr = self.Owner:GetEyeTrace()
-		
-		if (tr.Entity:IsVehicle()) then
-		    if (tr.Entity.bombPlanted and tr.Entity:LocalToWorld(tr.Entity.bombPlanted):Distance(tr.HitPos) < 10) then
-				self:SetNextPrimaryFire(CurTime() +15)
-				self.Owner:EmitSound("vo/npc/vortigaunt/yes.wav")
-				
-				self.defuseTarget = tr.Entity
-				
-				timer.Create(self.Owner:EntIndex().."_defuseBomb", 1, 10, function()
-					self:SendWeaponAnim(ACT_VM_HITCENTER)
-
-                    local sparks = EffectData()
-                    
-					sparks:SetOrigin(self.Owner:GetEyeTrace().HitPos)
-                    util.Effect("StunstickImpact", sparks, false, true)
-					
-					if (timer.RepsLeft(self.Owner:EntIndex().."_defuseBomb") == 0) then
-					    self:EmitSound("weapons/stunstick/alyx_stunner1.wav")
-						self.Owner:PrintMessage(HUD_PRINTCENTER, "You have defused the Car Bomb!")
-						
-						self.defuseTarget = nil
-						
-						tr.Entity.bombPlanted = nil
-						tr.Entity.beep = nil
-						
-						timer.Remove("carBomb_"..tr.Entity:EntIndex().."_Explode")
-			            hook.Remove("Think", "carBomb_"..tr.Entity:EntIndex().."_TimedExplosion")
-					else
-					    self:EmitSound("physics/metal/metal_computer_impact_hard"..math.random(1, 3)..".wav")
-					end
-					
-					timer.Simple(0.5, function()
-				        if (self:IsValid()) then
-					        self:SendWeaponAnim(ACT_VM_IDLE)
-					    end
-				    end)
-				end)
-			end
-		end
-	end
+function SWEP:CanSecondaryAttack()
+	return (self:GetNextSecondaryFire() < CurTime())
 end
 
-if (SERVER) then
-    function SWEP:Think()
-	    if (self.defuseTarget) then
-		    local tr = self.Owner:GetEyeTrace()
-		
-	        if (self.defuseTarget != tr.Entity or tr.HitPos:Distance(self.Owner:GetPos()) > 80 or tr.Entity:LocalToWorld(tr.Entity.bombPlanted):Distance(tr.HitPos) > 25) then
-			    self:SetNextPrimaryFire(CurTime())
-				self.defuseTarget = nil
-				
-				timer.Remove(self.Owner:EntIndex().."_defuseBomb")
-			end
-		end
-	end
-
-	function SWEP:Holster()
-		self:SetNextPrimaryFire(CurTime())
-	    self.defuseTarget = nil
-	
-		timer.Remove(self.Owner:EntIndex().."_defuseBomb")
-		
-		return true
-	end
+function SWEP:CanPrimaryAttack()
+	self.Owner:LagCompensation(true)
+	local trent = self.Owner:GetEyeTrace().Entity
+	self.Owner:LagCompensation(false)
+	return trent.HasCarBombPlanted and IsValid(trent) and trent:IsVehicle() and (self.Owner:GetPos():Distance(trent:GetPos()) < 512)
 end
+
+function SWEP:Deploy()
+	self:SetHoldType("normal")
+	self.Weapon:SendWeaponAnim(ACT_VM_DRAW)
+	return true
+end
+
+function SWEP:Reload() end
 
 function SWEP:SecondaryAttack()
+	if (not self:CanSecondaryAttack()) then return end
+	self:SetNextSecondaryFire(CurTime() + 0.5)
+	self.Owner:LagCompensation(true)
+	local trent = self.Owner:GetEyeTrace().Entity
+	self.Owner:LagCompensation(false)
+	if trent.HasCarBombPlanted then
+		self:EmitSound(Sound("buttons/blip1.wav"))
+		if SERVER then
+			self.Owner:ChatPrint("Car bomb detected!")
+		end
+	end
 end
 
-function SWEP:Initialize()
-	self:SetWeaponHoldType("slam")
+function SWEP:PrimaryAttack()
+	if (not self:CanPrimaryAttack()) then return end
+	self:SetNextPrimaryFire(CurTime() + 3)
+	if SERVER then
+		self.Owner:ChatPrint("Defusing...")
+	end
+	self:EmitSound(Sound("weapons/c4/c4_disarm.wav"))
+	timer.Simple(3, function()
+		if self:CanPrimaryAttack() and IsValid(self.Owner) then
+			self:EmitSound(Sound("weapons/c4/c4_disarm.wav"))
+			self.Owner:LagCompensation(true)
+			local trent = self.Owner:GetEyeTrace().Entity
+			self.Owner:LagCompensation(false)
+			trent.HasCarBombPlanted = nil
+			if SERVER then
+				self.Owner:ChatPrint("Bomb defused!")
+				self.Owner:StripWeapon(self.ClassName)
+			end
+		else
+			if SERVER then
+				self.Owner:ChatPrint("Defusing failed!")
+			end
+		end
+	end)
 end

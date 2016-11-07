@@ -1,192 +1,158 @@
 SWEP.PrintName = "Car Bomb"
-SWEP.Instructions = "Primary fire on a car to plant the bomb.\nSecondary fire to alter the detonation time."
-SWEP.Purpose = "Win a fight without wasting a single bullet."
-
-SWEP.Category = "Car Bomb"
-
-SWEP.AdminSpawnable = true
+SWEP.Author = "Sir Francis Billard"
+SWEP.Instructions = "Left click to plant bomb.\nRight click to change bomb type.\nReload to change bomb timer."
 SWEP.Spawnable = true
 
-SWEP.Primary.ClipSize		= -1
-SWEP.Primary.DefaultClip	= -1
-SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo		= "none"
-
-SWEP.Secondary.ClipSize		= -1
-SWEP.Secondary.DefaultClip	= -1
-SWEP.Secondary.Automatic	= false
-SWEP.Secondary.Ammo		= "none"
-
-SWEP.DrawAmmo			= false
-SWEP.DrawCrosshair		= true
-
-SWEP.ViewModelFOV = 75
-SWEP.ViewModelFlip = false
-SWEP.UseHands = true
 SWEP.ViewModel = "models/weapons/cstrike/c_c4.mdl"
+SWEP.UseHands = true
+SWEP.ViewModelFOV = 60
 SWEP.WorldModel = "models/weapons/w_c4.mdl"
 
-if (SERVER) then
-	local auto_Remove = {}
-	
-	local function explode(vehicle)
-		local debree = ents.Create("prop_physics")
-	
-	    debree:SetModel(vehicle:GetModel())
-        debree:SetPos(vehicle:GetPos())
-        debree:SetAngles(vehicle:GetAngles())
-        debree:Spawn()
+SWEP.SwayScale = 1
+SWEP.DrawAmmo = false
+SWEP.Slot = 4
 
-        debree:GetPhysicsObject():AddVelocity(vehicle:GetPhysicsObject():GetVelocity() +Vector(0, 0, math.random(250, 500)))
-	    debree:GetPhysicsObject():AddAngleVelocity(vehicle:GetPhysicsObject():GetAngleVelocity())
+SWEP.Primary.Ammo = "None"
+SWEP.Primary.ClipSize = -1
+SWEP.Primary.DefaultClip = -1
+SWEP.Primary.Automatic = false
 
-	    debree:SetMaterial("models/props_foliage/tree_deciduous_01a_trunk")
-	    debree:Ignite(60)
-	
-	    local explosion = ents.Create("env_explosion")
+SWEP.Secondary.Ammo = "None"
+SWEP.Secondary.ClipSize = -1
+SWEP.Secondary.DefaultClip = -1
+SWEP.Secondary.Automatic = false
 
-        explosion:SetPos(vehicle:GetPos())
-		explosion:SetOwner(debree)
-	    explosion:Spawn()
-		explosion:SetKeyValue("iMagnitude", "250")
-	    explosion:Fire("Explode", 0, 0)
-	
-	    vehicle:Remove()
-	
-	    auto_Remove[debree] = 60
-    end
-	
-	function SWEP:TimedExplosion(vehicle)
-	    vehicle.beep = {}
-
-		vehicle.beep.count = math.Clamp(self.timeToDetonate /10, SoundDuration("weapons/c4/c4_click.wav"), 999)
-		vehicle.beep.time = CurTime() +vehicle.beep.count
-
-		timer.Create("carBomb_"..vehicle:EntIndex().."_Explode", 1, self.timeToDetonate, function()
-			vehicle.beep.count = math.Clamp(timer.RepsLeft("carBomb_"..vehicle:EntIndex().."_Explode") /10, SoundDuration("weapons/c4/c4_click.wav"), 999)
-
-			if (timer.RepsLeft("carBomb_"..vehicle:EntIndex().."_Explode") == 0) then
-				hook.Remove("Think", "carBomb_"..vehicle:EntIndex().."_TimedExplosion")
-				explode(vehicle)
-			end
-		end)
-
-		hook.Add("Think", "carBomb_"..vehicle:EntIndex().."_TimedExplosion", function()
-			if (vehicle.beep.time <= CurTime()) then
-		        vehicle:EmitSound("weapons/c4/c4_click.wav", 60)
-			    vehicle.beep.time = CurTime() +vehicle.beep.count
-		    end
-		end)              
-	end
-	
-	function SWEP:Holster()
-	    self:SetNextPrimaryFire(CurTime())
-	    self:SetNextSecondaryFire(CurTime())
-		
-		self.plantTarget = nil
-		
-		timer.Remove(self.Owner:EntIndex().."_plantBomb")
-		
-		return true
-	end
-	
-	function SWEP:Think()
-	    if (self.plantTarget) then
-            local tr = self.Owner:GetEyeTrace()
-		
-		    if (self.plantTarget != tr.Entity or tr.HitPos:Distance(self.Owner:GetPos()) > 80) then
-			    self:SendWeaponAnim(ACT_VM_IDLE)
-				self:SetNextPrimaryFire(CurTime())
-			    self:SetNextSecondaryFire(CurTime())
-			
-			    self.plantTarget = nil
-			
-			    timer.Remove(self.Owner:EntIndex().."_plantBomb")		
-			end
-		end
-	end
-	
-	timer.Create("carBomb_AutoRemoval", 1, 0, function()
-	    for k, v in pairs(auto_Remove) do
-		    auto_Remove[k] = auto_Remove[k] -1
-			
-			if (auto_Remove[k] == 0) then
-			    k:Remove()
-			end
-		end
-	end)
-	
-	hook.Add("VehicleMove", "carBomb_DisableVehicle", function(ply, vehicle)
-        if (vehicle.bombPlanted and not vehicle.beep) then
-			explode(vehicle)
-	    end
-	end)
-	
-	hook.Add("EntityRemoved", "carBomb_RemoveEverything", function(ent)
-	    if (ent.beep) then
-		    timer.Remove("carBomb_"..ent:EntIndex().."_Explode")
-			hook.Remove("Think", "carBomb_"..ent:EntIndex().."_TimedExplosion")
-		end
-		
-		auto_Remove[ent] = nil
-	end)
+function SWEP:SetupDataTables()
+	self:NetworkVar("Int", 0, "DetonateTime")
+	self:NetworkVar("Int", 1, "ReloadSpamTime")
+	self:NetworkVar("Int", 2, "PlantingProgress")
+	self:NetworkVar("Bool", 0, "BombType")
+	self:NetworkVar("Bool", 1, "Deploying")
+	self:NetworkVar("Bool", 2, "Planting")
 end
 
-function SWEP:PrimaryAttack()
-    if (SERVER) then
-	    local ent = self.Owner:GetEyeTrace().Entity
-		
-		if (ent:IsVehicle() and self.Owner:GetEyeTrace().HitPos:Distance(self.Owner:GetPos()) < 80) then
-		    if (not ent:IsEngineStarted()) then
-				if (not ent.bombPlanted) then
-					self:SendWeaponAnim(ACT_VM_PRIMARYATTACK)
-					self:SetNextPrimaryFire(CurTime() +5)
-				    self:SetNextSecondaryFire(CurTime() +5)
-			
-		            self.plantTarget = ent
-		
-		            timer.Create(self.Owner:EntIndex().."_plantBomb", 3, 1, function()
-					    if (self:IsValid()) then
-						    if (self.timeToDetonate > 0) then
-						        self:TimedExplosion(ent)
-					        end
-					
-					        ent.bombPlanted = ent:WorldToLocal(self.Owner:GetEyeTrace().HitPos) --needs updated details...
-			            
-						    self.Owner:PrintMessage(HUD_PRINTCENTER, "You have planted the car bomb...")
-						    self.Owner:SendLua('surface.PlaySound("buttons/button14.wav")')
-						    self.Owner:StripWeapon(self:GetClass())
-                        end							
-		            end)
-			    else
-			        DarkRP.notify(self.Owner, 1, 5, "This car already has a bomb planted!")
-			    end
-			else
-			    DarkRP.notify(self.Owner, 1, 5, "You can't plant a bomb on a car that's on!")
-			end
+function SWEP:CanSecondaryAttack()
+	return (self:GetNextSecondaryFire() < CurTime()) and (not self:GetDeploying())
+end
+
+function SWEP:CanPrimaryAttack()
+	self.Owner:LagCompensation(true)
+	local trent = self.Owner:GetEyeTrace().Entity
+	self.Owner:LagCompensation(false)
+	return (not self:GetDeploying()) and (not trent.HasCarBombPlanted) and IsValid(trent) and trent:IsVehicle() and (self.Owner:GetPos():Distance(trent:GetPos()) < 512)
+end
+
+function SWEP:Deploy()
+	self:SetDeploying(true)
+	self:SetHoldType("slam")
+	self.Weapon:SendWeaponAnim(ACT_VM_DRAW)
+	timer.Simple(self:SequenceDuration() + 0.1, function()
+		if IsValid(self) then
+			self:SetDeploying(false)
+		end
+	end)
+	return true
+end
+
+function SWEP:Holster()
+	self:SetPlanting(false)
+	self:SetPlantingProgress(0)
+	return true
+end
+
+function SWEP:Reload()
+	if (self:GetReloadSpamTime() < CurTime()) then
+		self:SetReloadSpamTime(CurTime() + 1)
+		self:EmitSound(Sound("weapons/c4/c4_beep1.wav"))
+		if self:GetDetonateTime() < 26 then
+			self:SetDetonateTime(self:GetDetonateTime() + 5)
+		else
+			self:SetDetonateTime(5)
+		end
+		if SERVER then
+			self.Owner:ChatPrint("Timer has been set to "..self:GetDetonateTime().." seconds.")
 		end
 	end
 end
 
 function SWEP:SecondaryAttack()
-    if (SERVER) then
-	    self.timeToDetonate = self.timeToDetonate +15
-		
-		if (self.timeToDetonate > 60) then
-			self.timeToDetonate = 0
-			self.Owner:PrintMessage(HUD_PRINTCENTER, "Detonate on Startup")
-		else
-		    self.Owner:PrintMessage(HUD_PRINTCENTER, self.timeToDetonate.." Seconds")
-		end
-		
-		self.Owner:SendLua('surface.PlaySound("buttons/button17.wav")')
+	if (not self:CanSecondaryAttack()) then return end
+	self:SetNextSecondaryFire(CurTime() + 0.5)
+	self:EmitSound(Sound("weapons/c4/c4_beep1.wav"))
+	self:SetBombType(not self:GetBombType())
+	if SERVER then
+		self.Owner:ChatPrint(self:GetBombType() and "Bomb type switched to timed." or "Bomb type switched to ignition.")
 	end
 end
 
-function SWEP:Initialize()
-	if (SERVER) then
-	    self.timeToDetonate = 0
+function SWEP:PrimaryAttack()
+	if (not self:CanPrimaryAttack()) or self:GetPlanting() then return end
+	self:SetPlanting(true)
+	self:SetNextPrimaryFire(CurTime() + 1)
+	self.Weapon:SendWeaponAnim(ACT_VM_PRIMARYATTACK)
+	for i = ((self:SequenceDuration() + 0.1) / 100), (self:SequenceDuration() + 0.1), ((self:SequenceDuration() + 0.1) / 100) do
+		timer.Simple(i, function()
+			if IsValid(self) and IsValid(self.Owner) then
+				self:SetPlantingProgress(self:GetPlantingProgress() + 1)
+			end
+		end)
 	end
-	
-	self:SetWeaponHoldType("slam")
+	timer.Simple(self:SequenceDuration() + 0.1, function()
+		if IsValid(self) and (not self:CanPrimaryAttack()) then
+			self.Weapon:SendWeaponAnim(ACT_VM_IDLE)
+			self:SetPlanting(false)
+			self:SetPlantingProgress(0)
+			return
+		end
+		if (not IsValid(self)) then return end
+		if IsValid(self.Owner) and IsValid(self.Owner:GetActiveWeapon()) and (self.Owner:GetActiveWeapon():GetClass() == self.ClassName) then
+			self:EmitSound(Sound("weapons/c4/c4_plant.wav"))
+			if self.Owner:IsPlayer() then
+				self.Owner:LagCompensation(true)
+			end
+			local veh = util.TraceLine(util.GetPlayerTrace(self.Owner)).Entity
+			if self.Owner:IsPlayer() then
+				self.Owner:LagCompensation(false)
+			end
+			if SERVER then
+				self.Owner:StripWeapon(self.ClassName)
+			end
+			if self:GetBombType() then
+				if self:GetDetonateTime() < 1 then
+					self:SetDetonateTime(5)
+				end
+				timer.Simple(self:GetDetonateTime(), function()
+					if (not IsValid(veh)) or (not SERVER) then return end
+					if IsValid(veh:GetDriver()) then
+						veh:GetDriver():Kill()
+					end
+					local boom = EffectData()
+					boom:SetOrigin(veh:GetPos())
+					util.Effect("HelicopterMegaBomb", boom)
+					veh:EmitSound(Sound("weapons/awp/awp1.wav"))
+					veh:TakeDamage(1337, self, self)
+				end)
+			else
+			veh.HasCarBombPlanted = true
+			end
+		end
+	end)
+end
+
+if CLIENT then
+	function SWEP:DrawHUD()
+		if self:GetPlanting() then
+			local color_r = math.ceil(((self:GetPlantingProgress() / 100) * -255) + 255)
+			local color_g = math.ceil((self:GetPlantingProgress() / 100) * 255)
+			print(color_r.." - "..color_g)
+			local width = 200
+			local height = 60
+			local border = 5
+			local master_h = (ScrH() / 2) - 200
+			local master_w = (ScrW() / 2) - (width / 2)
+			draw.RoundedBox(8, master_w - border, master_h - border, width + (border * 2), height + (border * 2), Color(0, 0, 0))
+			draw.RoundedBox(8, master_w, master_h, (width / 100) * self:GetPlantingProgress(), height, Color(0, 0, 255))
+			draw.SimpleText("Planting...", "Trebuchet24", master_w + 55, master_h + 20, Color(255, 255, 255))
+		end
+	end
 end
