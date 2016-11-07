@@ -1,5 +1,5 @@
 
-local function WeaponShipment(who, cat, wep, amt)
+local function WeaponShipment(who, cat, wep, amt, modelOverride)
 	if type(weapons.Get(wep)) ~= "table" then
 		ErrorNoHalt("[DarkRP] Shipment class " .. wep .. " is invalid!")
 		return
@@ -9,7 +9,7 @@ local function WeaponShipment(who, cat, wep, amt)
 		name = string.sub(name, 5)
 	end
 	DarkRP.createShipment(name, {
-		model = weapons.Get(wep).WorldModel or "models/props_junk/watermelon01.mdl",
+		model = modelOverride or weapons.Get(wep).WorldModel or "models/props_junk/watermelon01.mdl",
 		entity = wep,
 		price = amt * 10,
 		amount = 10,
@@ -20,7 +20,7 @@ local function WeaponShipment(who, cat, wep, amt)
 		category = cat,
 	})
 	DarkRP.createShipment(name, {
-		model = weapons.Get(wep).WorldModel or "models/props_junk/watermelon01.mdl",
+		model = modelOverride or weapons.Get(wep).WorldModel or "models/props_junk/watermelon01.mdl",
 		entity = wep,
 		price = amt,
 		amount = 1,
@@ -197,7 +197,7 @@ WeaponShipment(TEAM_VAPE, "Vapes", "weapon_vape_juicy", 5000)
 WeaponShipment(TEAM_VAPE, "Vapes", "weapon_vape_medicinal", 10000)
 WeaponShipment(TEAM_VAPE, "Vapes", "weapon_vape_mega", 1000000)
 
-WeaponShipment({TEAM_MAYOR, TEAM_CHIEF, TEAM_WOODY, TEAM_POLICE}, "Government Issue Supplies", "car_bomb_defuser", 4000)
+WeaponShipment({TEAM_MAYOR, TEAM_CHIEF, TEAM_WOODY, TEAM_POLICE}, "Government Issue Supplies", "car_bomb_defuser", 4000, "models/weapons/w_defuser.mdl")
 
 EntityShipment(TEAM_DOCTOR, "Medical", "durgz_aspirin", "aspirin", 1200, "models/jaanus/aspbtl.mdl")
 EntityShipment(TEAM_DOCTOR, "Medical", "cityrp_medkit", "medicalkit", 1000, "models/Items/HealthKit.mdl")
